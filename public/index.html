@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vasil Burak</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎾</text></svg>">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+
+</head>
+
+<body class="">
+
+    <div class="" id="header">
+
+        <h1 id="name"> </h1>
+        <p id="intro"> </p>
+
+    </div>
+
+
+    <div id="items">
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            getSites();
+        });
+
+        function getSites() {
+            fetch('/api/sites')
+                .then(response => response.json())
+                .then(data => {
+                    var items = document.getElementById('items');
+
+                    const name = document.getElementById('name');
+                    const intro = document.getElementById('intro');
+
+                    name.innerHTML = `${data.title.slice('')}`;
+                    intro.innerHTML = `${data.metadata.description}`;
+
+                    data.contents.map((item) => {
+                        if (item.class == 'Channel') {
+
+                            // let square = item.title.match(/\[(.*?)\]/)[0];
+                            // let round = item.title.match(/\((.*)\)/)[0];
+
+                            // let squareless = item.title.replace(square,'');
+                            
+                            // let finalname = squareless.replace(round, '');
+
+                            var link = `
+                                <p> <a class="channel" href="${item.slug}">${item.title}</a> </p>
+                            `;
+                            items.insertAdjacentHTML('beforeend', link);
+                        } else if (item.class == 'Image') {
+                            var image = `
+                                <figure><img src="${item.image.original.url}"/></figure>
+                            `;
+                            items.insertAdjacentHTML('beforeend', image);
+                        } else if (item.class == 'Text' && item.title.includes("ignore")) {
+
+                        } else if (item.class == 'Text') {
+
+                            var text = `
+                                ${item.content_html}
+                            `;
+                            items.insertAdjacentHTML('beforeend', text);
+                        }
+                    })
+                })
+                .catch(error => console.error(error))
+        }
+    </script>
+
+</body>
+
+</html>

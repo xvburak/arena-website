@@ -1,7 +1,7 @@
 # arena-website
 
 1. Clone repository
-`git clone https://github.com/xvburak/arena-website && cd arena-webiste`
+`git clone https://github.com/xvburak/arena-website && cd arena-website`
 
 
 2. Choose your channel

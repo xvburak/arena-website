@@ -8,7 +8,7 @@
 (e.g. channel: https://www.are.na/are-na-commons/animation-superchannel; slug: `animation-superchannel`)
 
 
-3. Install Dependencies
+3. Install dependencies
 `npm install`
 
 

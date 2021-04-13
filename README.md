@@ -4,12 +4,11 @@
 `git clone https://github.com/xvburak/arena-website && cd arena-website`
 
 
-2. Choose your channel
-In app.js replace `'xvburak-online'` with a channel slug of your choice. 
+2. In app.js replace `'xvburak-online'` with a channel slug of your choice. 
 (e.g. channel: https://www.are.na/are-na-commons/animation-superchannel; slug: `animation-superchannel`)
 
 
-3. Install Dependencies
+3. Install dependencies
 `npm install`
 
 

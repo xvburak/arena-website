@@ -3,18 +3,15 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Vasil Burak</title>
+    <title id="title-name"></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎾</text></svg>">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
 
 </head>
 
 <body class="">
-fsfd
     <div class="" id="header">
 
         <h1 id="name"> </h1>
@@ -38,9 +35,23 @@ fsfd
                     var items = document.getElementById('items');
 
                     const name = document.getElementById('name');
+                    const titleName = document.getElementById('title-name');
+
                     const intro = document.getElementById('intro');
+                    let emoji =
+                        `${data.title.match(/[\u{1f300}-\u{1f5ff}\u{1f900}-\u{1f9ff}\u{1f600}-\u{1f64f}\u{1f680}-\u{1f6ff}\u{2600}-\u{26ff}\u{2700}-\u{27bf}\u{1f1e6}-\u{1f1ff}\u{1f191}-\u{1f251}\u{1f004}\u{1f0cf}\u{1f170}-\u{1f171}\u{1f17e}-\u{1f17f}\u{1f18e}\u{3030}\u{2b50}\u{2b55}\u{2934}-\u{2935}\u{2b05}-\u{2b07}\u{2b1b}-\u{2b1c}\u{3297}\u{3299}\u{303d}\u{00a9}\u{00ae}\u{2122}\u{23f3}\u{24c2}\u{23e9}-\u{23ef}\u{25b6}\u{23f8}-\u{23fa}]/ug)}`;
+
+                    var myHeaders = new Headers();
+                    myHeaders.append('Content-Type', 'image/jpeg');
+
+                    // const favicon = document.createElement('link');
+                    // favicon.href = 'href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${emoji}</text></svg>"';
+                    // favicon.rel = 'rel="icon"';
+                    // document.getElementsByTagName('head').appendChild(favicon);
+                    // document.getElementsByTagName('head')[0].append('<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐨</text></svg>">');
 
                     name.innerHTML = `${data.title}`;
+                    titleName.innerHTML = `${data.title}`;
                     intro.innerHTML = `${data.metadata.description}`;
 
                     data.contents.map((item) => {
@@ -50,7 +61,7 @@ fsfd
                             // let round = item.title.match(/\((.*)\)/)[0];
 
                             // let squareless = item.title.replace(square,'');
-                            
+
                             // let finalname = squareless.replace(round, '');
 
                             var link = `

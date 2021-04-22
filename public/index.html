@@ -6,7 +6,8 @@
     <title id="title-name"></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐨</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐨</text></svg>">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
 
@@ -20,11 +21,17 @@
 
     </div>
 
+    <!-- <blockquote class="twitter-tweet" data-conversation="none" data-lang="en" data-dnt="true" data-theme="dark">
+        <a href="https://twitter.com/s_levien/status/1191379489143558147"></a>
+    </blockquote>
+    -->
 
     <div id="items">
     </div>
 
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script>
+        
         document.addEventListener("DOMContentLoaded", function () {
             getSites();
         });
@@ -57,7 +64,7 @@
 
                     data.contents.map((item) => {
                         if (item.class == 'Channel') {
-
+                            console.log(item);
                             // let square = item.title.match(/\[(.*?)\]/)[0];
                             // let round = item.title.match(/\((.*)\)/)[0];
 
@@ -70,6 +77,7 @@
                             `;
                             items.insertAdjacentHTML('beforeend', link);
                         } else if (item.class == 'Image') {
+
                             var image = `
                                 <figure><img src="${item.image.original.url}"/></figure>
                             `;

@@ -22,11 +22,6 @@ app.get('/api/sites', function(req, res){
 })
 
 app.get('/api/:site', function(req, res){
-  // add search params for page, eg /api/scoby?page=2
-  // ------------------------------------------------
-  // its an art to find the perfect balance between
-  // amount of blocks to return per request and the
-  // actual amount of requests needed to load content
   arena.channel(req.params.site).contents({ page: req.query.page ? req.query.page : 1, 
     per: req.query.per ? req.query.per : 24,
     direction: 'desc',
@@ -34,7 +29,6 @@ app.get('/api/:site', function(req, res){
    })
     .then(contents => {
       res.send(contents);
-      // res.sendFile(__dirname + '/public/index.html');
     })
     .catch(err => console.log(err));
 })

@@ -10,7 +10,7 @@ let arena = new Arena();
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/api/sites', function(req, res){
-  arena.channel('xvburak-online').get({ page: req.query.page ? req.query.page : 1, per: 64,
+  arena.channel('place-navigate-olive').get({ page: req.query.page ? req.query.page : 1, per: 64,
     direction: 'desc',
     sort: 'position'
    })
@@ -34,17 +34,17 @@ app.get('/api/:site', function(req, res){
 })
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile(__dirname + '/index.html');
 })
 
 app.get('/:page', (req, res) => {
-  res.sendFile(__dirname + '/public/page.html');
+  res.sendFile(__dirname + '/page.html');
 })
 
-app.use(express.static(__dirname + '/public', {
+app.use(express.static(__dirname + '/', {
     extensions: ['html', 'htm'],
 }));
 
-app.listen(process.env.PORT || 3001, process.env.IP || '0.0.0.0', ()=>{
-  console.log('app listening on port 3001')
+app.listen(process.env.PORT || 8080, process.env.IP || '0.0.0.0', ()=>{
+  console.log('app listening on port 8080')
 });

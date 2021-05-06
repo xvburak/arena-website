@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎾</text></svg>">
+    <!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> -->
+    <link href="css/main.css" rel="stylesheet">
+
+
+
+</head>
+
+<body class="">
+
+    <h1 style="display: none;" id='loading'>loading</h1>
+    <section class="">
+        <div class="" id="blocks">
+        </div>
+    </section>
+
+    <button style="display: none;" id='load-more'>...</button>
+
+    <script>
+        const path = window.location.pathname;
+        const pretty_title = path.slice(1);
+        const head = document.getElementsByTagName('head');
+        const title = document.getElementById('title');
+        const blocks = document.getElementById('blocks');
+        const loadMoreBtn = document.getElementById('load-more');
+        const loadingEl = document.getElementById('loading');
+        const namer = document.getElementById('namer');
+
+        let perPage = 48
+        let page = 0
+        let loading = false
+        let initialSetup = false
+
+        let CONTENT = []
+
+        function init() {
+            document.title = pretty_title;
+            makeRequest()
+
+            loadMoreBtn.addEventListener('click', () => {
+                if (!loading) {
+                    makeRequest()
+                }
+            })
+        }
+
+
+        function setupContent(data) {
+            data.map((item) => {
+                var div = document.createElement("div");
+
+                if (item.class == 'Text') {
+                    div.classList.add("text");
+                    div.innerHTML = `
+                                ${item.content_html}
+                            `;
+                } else if (item.class == 'Link') {
+                    div.classList.add("link");
+                    div.innerHTML = `
+                                <a href="${item.source.url}">
+                                    <img alt="Qries" src="${item.image.display.url}"
+                                </a>
+
+                            `;
+                } else if (item.class == 'Image') {
+                        div.classList.add("image");
+                        div.innerHTML = `
+                                <img src="${item.image.original.url}" alt="${item.title}"/>
+                                <figcaption> ${item.description} </figcaption>`;
+        
+                } else if (item.class == 'Attachment') {
+                    if (item.attachment.content_type == 'video/mp4') {
+                        div.classList.add("video");
+                        div.innerHTML = `
+                                    <video controls>
+                                        <source src="${item.attachment.url}" type="video/mp4">
+                                    </video>
+                                `;
+                    }
+                }
+
+                if (item.title == 'stylesheet') {
+                    var css = item.content,
+                        head = document.head || document.getElementsByTagName('head')[0],
+                        style = document.createElement('style');
+
+                    head.appendChild(style);
+
+                    style.type = 'text/css';
+                    if (style.styleSheet) {
+                        // This is required for IE8 and below.
+                        style.styleSheet.cssText = css;
+                    } else {
+                        style.appendChild(document.createTextNode(css));
+                    }
+                } else if (item.title == 'config') {
+
+
+                } else {
+                    blocks.appendChild(div);
+                }
+            });
+        }
+
+        function conclude() {
+            // callback once there are no more blocks to add
+            // moved reverse function here once posts are loaded
+            endLoading()
+            loadMoreBtn.remove()
+        }
+
+        function startLoading() {
+            loading = true
+            loadMoreBtn.classList.remove('able-to-load')
+            loadingEl.classList.remove('done-loading')
+        }
+
+        function endLoading() {
+            window.scrollTo(0, window.scrollY + loadMoreBtn.offsetHeight)
+            loading = false
+            loadingEl.classList.add('done-loading')
+        }
+
+        function makeRequest() {
+            startLoading()
+            if (page === false) return false
+
+            page++
+
+                fetch(`/api${path}?page=${page}&per=${perPage}`)
+                    .then(response => response.json())
+                    .then(data => {
+
+
+                        if (data.length < perPage) {
+                            setupContent(data)
+                            conclude()
+                            page = false
+                            return false
+                        } else {
+                            loadMoreBtn.classList.add('able-to-load')
+                        }
+
+                        // keep appending to the content array
+                        // CONTENT = [...CONTENT, ...data]
+                        endLoading()
+                        setupContent(data)
+                    })
+
+                    //2 do add error support
+                    .catch(error => console.error(error))
+            }
+
+            document.addEventListener("DOMContentLoaded", init);
+
+    </script>
+
+</body>
+
+</html>

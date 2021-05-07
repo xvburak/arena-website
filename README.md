@@ -16,4 +16,4 @@
 `npm start`
 
 
-5. Your site should be running on http://localhost:8080/ ✨
+5. Your site should be running on http://localhost:8000/ ✨

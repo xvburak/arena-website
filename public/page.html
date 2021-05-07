@@ -73,7 +73,7 @@
                 } else if (item.class == 'Image') {
                         div.classList.add("image");
                         div.innerHTML = `
-                                <img src="${item.image.original.url}" alt="${item.title}"/>
+                                <img src="${item.image.display.url}" alt="${item.title}"/>
                                 <figcaption> ${item.description} </figcaption>`;
         
                 } else if (item.class == 'Attachment') {

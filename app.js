@@ -29,22 +29,23 @@ app.get('/api/:site', function(req, res){
    })
     .then(contents => {
       res.send(contents);
+      // res.sendFile(__dirname + '/public/index.html');
     })
     .catch(err => console.log(err));
 })
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/public/index.html');
 })
 
 app.get('/:page', (req, res) => {
-  res.sendFile(__dirname + '/page.html');
+  res.sendFile(__dirname + '/public/page.html');
 })
 
-app.use(express.static(__dirname + '/', {
+app.use(express.static(__dirname + '/public', {
     extensions: ['html', 'htm'],
 }));
 
-app.listen(process.env.PORT || 8080, process.env.IP || '0.0.0.0', ()=>{
-  console.log('app listening on port 8080')
+app.listen(process.env.PORT || 8000, process.env.IP || '0.0.0.0', ()=>{
+  console.log('app listening on port 8000')
 });

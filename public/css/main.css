@@ -17,6 +17,7 @@
     --text-small: 16px;
     --text-normal: 18px;
     --text-big: 26px;
+    --text-bigger: 32px;
 
     /* typography */
     --typo-sans: -apple-system, 'Helvetica Neue', 'Arial', sans-serif;
@@ -24,6 +25,7 @@
 
     /* sizes */
     --none: 0px;
+    --xxs: 0.125rem;
     --xs: 0.25rem;
     --sm: 0.5rem;
     --md: 1rem;
@@ -143,16 +145,27 @@ figcaption {
 
 a {
     text-decoration: underline;
-}
-
-a:hover {
-    color: var(--color-tuna);
-    text-decoration: none;
+    color: var(--color-kale);
 }
 
 div {
     margin-bottom: var(--md);
 }
+
+/* div.hero {
+    display: block;
+    text-align: center;
+    padding: var(--xxl) var(--lg) ;
+    background-color: var(--color-tuna);
+    
+}
+
+div.hero h1 {
+    font-size: var(--text-bigger);
+    margin-bottom: var(--none);
+    color: var(--color-jasmine);
+} */
+
 
 mark {
     background-color: var(--color-cavendish);
@@ -174,6 +187,7 @@ img {
     max-width: 100%;
     margin: 0px auto;
     display: block;
+    border-radius: var(--xxs);
 }
 
 div.image {

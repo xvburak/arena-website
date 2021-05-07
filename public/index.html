@@ -22,8 +22,8 @@
     </div>
 
 
-    <div id="items">
-    </div>
+    <ul id="items">
+    </ul>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -54,7 +54,7 @@
                             // let finalname = squareless.replace(round, '');
 
                             var link = `
-                                <p> <a class="channel" href="${item.slug}">${item.title}</a> </p>
+                                <li> <a class="channel" href="${item.slug}">${item.title}</a> </li>
                             `;
                             items.insertAdjacentHTML('beforeend', link);
                         } else if (item.class == 'Image') {

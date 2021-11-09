@@ -5,12 +5,12 @@ const router = express.Router();
 app.use(bodyParser.json());
 const path = require('path');
 const Arena = require('are.na');
-let arena = new Arena();
+let arena = new Arena({ accessToken: "402ab5bb9bd011fe5dafbdf0d8acfb039007794df98e3d4d8f74cc9958c295f9" });
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/api/sites', function(req, res){
-  arena.channel('place-navigate-olive').get({ page: req.query.page ? req.query.page : 1, per: 64,
+  arena.channel('xvburak').get({ page: req.query.page ? req.query.page : 1, per: 64,
     direction: 'desc',
     sort: 'position'
    })
